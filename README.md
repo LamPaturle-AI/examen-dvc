@@ -14,6 +14,7 @@ Dans ce dépôt vous trouverez l'architecture proposée pour mettre en place la 
 │   ├── dvc.lock
 │   ├── dvc.yaml
 │   ├── requirements.txt   
+│   ├── setup.sh 
 │   ├── info.md 
 │   └── README.md       
 ```
