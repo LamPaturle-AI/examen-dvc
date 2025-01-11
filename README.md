@@ -11,6 +11,9 @@ Dans ce dépôt vous trouverez l'architecture proposée pour mettre en place la 
 │   ├── src    
 │   │   ├── data      
 │   │   └── models 
+│   ├── dvc.lock
+│   ├── dvc.yaml
+│   ├── requirements.txt   
 │   ├── info.md 
 │   └── README.md       
 ```
