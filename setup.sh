@@ -1,5 +1,5 @@
 # Change directory to project directory
-cd /Users/lampaturle/Desktop/SWITCH_PROJECT/Datascientest/examen-dvc/
+cd /Users/lampaturle/Desktop/SWITCH_PROJECT/Datascientest/examen-dvc
 
 # Create new virtual environnement
 mamba create -n dsdvcexam python=3.9
@@ -27,5 +27,11 @@ dvc remote modify origin --local secret_access_key 8a08ba4d3a9988a7f9c1664a9c97b
 # Setup default origin
 dvc remote default origin
 
-# Save
-dvc push
+
+
+
+# Install pipreqs
+pip install pipreqs 
+
+# Generate minimal requirements.txt
+pipreqs /examen-dvc --force
