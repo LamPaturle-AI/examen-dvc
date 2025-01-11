@@ -1,2 +1,5 @@
 /venv
 /clean_data.csv
+
+# Ignorer le fichier .DS_Store
+.DS_Store
