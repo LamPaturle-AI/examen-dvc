@@ -31,10 +31,7 @@ dvc remote default origin
 dvc add data/raw/raw.csv
 
 # Track the changes with git
-git add data/raw/raw.dvc data/raw/.gitignore
-
-# Push to DVC
-dvc push
+git add data/raw/raw.csv.dvc data/raw/.gitignore
 
 # Add stage 1
 dvc stage add -n split \
