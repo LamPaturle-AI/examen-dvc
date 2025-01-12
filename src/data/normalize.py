@@ -2,8 +2,8 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
 # Read the CSVs
-X_train = pd.read_csv("data/processed_data/X_train.csv")
-X_test = pd.read_csv("data/processed_data/X_test.csv")
+X_train = pd.read_csv("data/processed/X_train.csv")
+X_test = pd.read_csv("data/processed/X_test.csv")
 
 # Scaler initialization
 scaler = StandardScaler()
@@ -17,7 +17,7 @@ X_train_scaled = pd.DataFrame(X_train_scaled_array, columns=X_train.columns)
 X_test_scaled = pd.DataFrame(X_test_scaled_array, columns=X_test.columns)
 
 # Write the resulting normalized sets to CSV
-X_train_scaled.to_csv("data/processed_data/X_train_scaled.csv", index=False)
-X_test_scaled.to_csv("data/processed_data/X_test_scaled.csv", index=False)
+X_train_scaled.to_csv("data/processed/X_train_scaled.csv", index=False)
+X_test_scaled.to_csv("data/processed/X_test_scaled.csv", index=False)
 
-print("2 normalized datasets X_train_scaled.csv and X_test_scaled.csv saved to data/processed_data.")
+print("2 normalized datasets X_train_scaled.csv and X_test_scaled.csv saved to data/processed.")
