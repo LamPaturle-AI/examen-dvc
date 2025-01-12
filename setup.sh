@@ -31,17 +31,30 @@ dvc remote default origin
 dvc add data/raw
 
 # Track the changes with git
-git add data/raw/raw.dvc data/.gitignore
+git add data/raw.dvc data/.gitignore
 
 # Push to DVC
 dvc push
 
 # Add stage 1
-dvc stage add -n split \
+dvc stage add -n train_test_split \
               -d src/data/data_split.py -d data/raw \
               -o data/processed \
               python src/data/data_split.py
 dvc repro
+
+# Track new files on git
+git add dvc.yaml
+git add dvc.lock
+
+# Add data/processed to dvc
+dvc add data/raw
+
+# Track the changes with git
+git add data/raw.dvc data/.gitignore
+
+# Push to DVC
+dvc push
 
 # Add stage 2
 dvc stage add -n normalize \
@@ -51,7 +64,7 @@ dvc stage add -n normalize \
 dvc repro
 
 # Add stage 3
-dvc stage add -n gridsearch \
+dvc stage add -n grid_search \
               -d src/models/grid_search.py -d data/processed \
               -o models \
               python src/models/grid_search.py
