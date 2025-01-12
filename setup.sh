@@ -16,7 +16,7 @@ dvc init -f
 # Install AWS s3
 pip install "dvc[s3]"
 
-# Add a DagsHub DVC remote
+# Add DagsHub DVC remote
 dvc remote add origin s3://dvc
 dvc remote modify origin endpointurl https://dagshub.com/LamPaturle-AI/examen-dvc.s3
 
@@ -88,8 +88,18 @@ dvc repro
 # Track new files on git
 git add metrics/.gitignore
 
+# Add params.yaml file
+touch params.yaml
+
+# Track new file on Git
+git add params.yaml
+
+# Commit file to Git
+git commit -m "Add params.yaml for DVC"
+
 # Push to DVC
 dvc push
+dvc repro
 
 # Install libraries
 pip install pandas
@@ -100,6 +110,8 @@ pip install pipreqs
 
 # Generate minimal requirements.txt
 pipreqs .
+
+
 
 # Remove virtual environment
 mamba remove -n dsdvcexam --all
