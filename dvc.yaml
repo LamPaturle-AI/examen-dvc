@@ -9,6 +9,9 @@ stages:
     - data/processed/X_train.csv
     - data/processed/y_test.csv
     - data/processed/y_train.csv
+    params:
+    - split.test_size
+    - split.random_state
   normalize:
     cmd: python src/data/normalize.py
     deps:
@@ -26,6 +29,10 @@ stages:
     - src/models/grid_search.py
     outs:
     - models/best_params.pkl
+    params:
+    - model.n_estimators
+    - model.max_depth
+    - model.learning_rate
   train:
     cmd: python src/models/training.py
     deps:
