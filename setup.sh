@@ -56,7 +56,7 @@ dvc repro
 git add models/.gitignore
 
 # Add stage 3
-dvc stage add -n grid_search \
+dvc stage add -n gridsearch \
               -d src/models/grid_search.py \
               -d data/processed/X_train_scaled.csv \
               -d data/processed/y_train.csv \
