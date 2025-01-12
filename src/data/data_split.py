@@ -1,8 +1,16 @@
+import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+# Make sure data/processed exists
+os.makedirs("data/processed", exist_ok=True)
+
 # Read the raw CSV
 df = pd.read_csv("data/raw/raw.csv")
+
+# Check if the 'date' column is present and drop it
+if 'date' in df.columns:
+    df = df.drop("date", axis=1)
 
 # Separate features (X) and target (y)
 #    - Drop 'silica_concentrate' from X
