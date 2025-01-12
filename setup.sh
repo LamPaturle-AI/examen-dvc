@@ -31,7 +31,7 @@ dvc remote default origin
 dvc add data/raw
 
 # Track the changes with git
-git add data/raw.dvc data/.gitignore
+git add data/raw/raw.dvc data/.gitignore
 
 # Push to DVC
 dvc push
