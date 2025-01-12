@@ -11,7 +11,7 @@ mamba activate dsdvcexam
 pip install dvc
 
 # Initialize dvc
-dvc init -f
+dvc init
 
 # Install AWS s3
 pip install "dvc[s3]"
@@ -27,17 +27,17 @@ dvc remote modify origin --local secret_access_key 8a08ba4d3a9988a7f9c1664a9c97b
 # Setup default origin
 dvc remote default origin
 
-# Add data/raw to dvc
-dvc add data/raw
+# Add data/raw/raw.csv to dvc
+dvc add data/raw/raw.csv
 
 # Track the changes with git
-git add data/raw.dvc data/.gitignore
+git add data/raw/raw.dvc data/raw/.gitignore
 
 # Push to DVC
 dvc push
 
 # Add stage 1
-dvc stage add -n train_test_split \
+dvc stage add -n split \
               -d src/data/data_split.py -d data/raw \
               -o data/processed \
               python src/data/data_split.py
