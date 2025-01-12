@@ -3,6 +3,7 @@ stages:
     cmd: python src/data/data_split.py
     deps:
     - data/raw/raw.csv
+    - params.yaml
     - src/data/data_split.py
     outs:
     - data/processed/X_test.csv
@@ -26,6 +27,7 @@ stages:
     deps:
     - data/processed/X_train_scaled.csv
     - data/processed/y_train.csv
+    - params.yaml
     - src/models/grid_search.py
     outs:
     - models/best_params.pkl
