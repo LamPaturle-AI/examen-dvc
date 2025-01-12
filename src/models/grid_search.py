@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import GridSearchCV
@@ -38,7 +39,10 @@ print("Best MSE:", -grid_search.best_score_)
 # Extract the best model
 best_model = grid_search.best_estimator_
 
-# Save the best parameters as a .pkl file
+# Make sure the models folder exists
+os.makedirs("models", exist_ok=True)
+
+# Save the best parameters as a .pkl file in the models folder
 joblib.dump(grid_search.best_params_, "models/best_params.pkl")
 
 print("best_params.pkl saved to models.")
