@@ -27,7 +27,7 @@ dvc remote modify origin --local secret_access_key 8a08ba4d3a9988a7f9c1664a9c97b
 # Setup default origin
 dvc remote default origin
 
-# Add data/raw_data to dvc
+# Add data/raw to dvc
 dvc add data/raw
 
 # Track the changes with git
@@ -38,36 +38,36 @@ dvc push
 
 # Add stage 1
 dvc stage add -n split \
-              -d src/data/data_split.py -d data/raw_data \
-              -o data/processed_data \
+              -d src/data/data_split.py -d data/raw \
+              -o data/processed \
               python src/data/data_split.py
 dvc repro
 
 # Add stage 2
 dvc stage add -n normalize \
-              -d src/data/normalize.py -d data/processed_data \
-              -o data/processed_data \
+              -d src/data/normalize.py -d data/processed \
+              -o data/processed \
               python src/data/normalize.py
 dvc repro
 
 # Add stage 3
 dvc stage add -n gridsearch \
-              -d src/models/grid_search.py -d data/processed_data \
+              -d src/models/grid_search.py -d data/processed \
               -o models \
               python src/models/grid_search.py
 dvc repro
 
 # Add stage 4
 dvc stage add -n train \
-              -d src/models/training.py -d data/processed_data \
+              -d src/models/training.py -d data/processed \
               -o models \
               python src/models/training.py
 dvc repro
 
 # Add stage 5
 dvc stage add -n evaluate \
-              -d src/data/evaluate.py -d data/processed_data -d models \
-              -o processed_data -o metrics \
+              -d src/data/evaluate.py -d data/processed -d models \
+              -o processed -o metrics \
               python src/data/evaluate.py
 dvc repro
 
