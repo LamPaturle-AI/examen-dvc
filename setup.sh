@@ -35,6 +35,8 @@ dvc stage add -n split \
               -o data/processed/X_test.csv \
               -o data/processed/y_train.csv \
               -o data/processed/y_test.csv \
+              -p split.test_size \
+              -p split.random_state \
               python src/data/data_split.py
 dvc repro
 
@@ -52,17 +54,20 @@ dvc stage add -n normalize \
               python src/data/normalize.py
 dvc repro
 
-# Track new files on git
-git add models/.gitignore
-
 # Add stage 3
 dvc stage add -n gridsearch \
               -d src/models/grid_search.py \
               -d data/processed/X_train_scaled.csv \
               -d data/processed/y_train.csv \
               -o models/best_params.pkl \
+              -p model.n_estimators \
+              -p model.max_depth \
+              -p model.learning_rate\
               python src/models/grid_search.py
 dvc repro
+
+# Track new files on git
+git add models/.gitignore
 
 # Add stage 4
 dvc stage add -n train \
@@ -97,9 +102,11 @@ git add params.yaml
 # Commit file to Git
 git commit -m "Add params.yaml for DVC"
 
+# Check everything works
+dvc repro
+
 # Push to DVC
 dvc push
-dvc repro
 
 # Install libraries
 pip install pandas
@@ -110,8 +117,6 @@ pip install pipreqs
 
 # Generate minimal requirements.txt
 pipreqs .
-
-
 
 # Remove virtual environment
 mamba remove -n dsdvcexam --all
