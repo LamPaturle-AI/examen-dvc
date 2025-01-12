@@ -33,6 +33,9 @@ dvc add data/raw/raw.csv
 # Track the changes with git
 git add data/raw/raw.csv.dvc data/raw/.gitignore
 
+# Push to DVC
+dvc push
+
 # Add stage 1
 dvc stage add -n split \
               -d src/data/data_split.py -d data/raw \
