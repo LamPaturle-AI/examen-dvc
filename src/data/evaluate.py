@@ -8,17 +8,17 @@ model_path = "models/gbr_model.pkl"
 model = joblib.load(model_path)
 
 # Load the test data
-X_test = pd.read_csv("data/processed_data/X_test_scaled.csv")
-y_test = pd.read_csv("data/processed_data/y_test.csv")
+X_test = pd.read_csv("data/processed/X_test_scaled.csv")
+y_test = pd.read_csv("data/processed/y_test.csv")
 
 # Make predictions
 y_pred = model.predict(X_test)
 
 # Save predictions to CSV
 prediction_df = pd.DataFrame({"prediction": y_pred})
-prediction_csv_path = "data/processed_data/prediction.csv"
+prediction_csv_path = "data/processed/prediction.csv"
 prediction_df.to_csv(prediction_csv_path, index=False)
-print(f"prediction.csv saved to data/processed_data")
+print(f"prediction.csv saved to data/processed")
 
 # Calculate evaluation metrics
 mse = mean_squared_error(y_test,y_pred)
@@ -36,4 +36,4 @@ results = {
 with open(scores_path, "w") as f:
     json.dump(results, f, indent=4)
 
-print(f"scores.json saved to metrics")
+print(f"scores.json saved to metrics.")
