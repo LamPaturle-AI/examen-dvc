@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from sklearn.ensemble import GradientBoostingRegressor
 import joblib
@@ -15,6 +16,9 @@ gbr = GradientBoostingRegressor(random_state=42, **best_params)
 
 # Fit the model on the training data
 gbr.fit(X_train, y_train)
+
+# Make sure the models folder exists
+os.makedirs("models", exist_ok=True)
 
 # Save the trained model
 joblib.dump(gbr, "models/gbr_model.pkl")
