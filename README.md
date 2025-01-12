@@ -13,6 +13,7 @@ Dans ce dépôt vous trouverez l'architecture proposée pour mettre en place la 
 │   │   └── models 
 │   ├── dvc.lock
 │   ├── dvc.yaml
+│   ├── params.yaml
 │   ├── requirements.txt   
 │   ├── setup.sh 
 │   ├── info.md 
