@@ -1,5 +1,9 @@
+import os
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+
+# Make sure the data/processed folder exists
+os.makedirs("data/processed", exist_ok=True)
 
 # Read the CSVs
 X_train = pd.read_csv("data/processed/X_train.csv")
