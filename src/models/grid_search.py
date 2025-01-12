@@ -4,8 +4,8 @@ from sklearn.model_selection import GridSearchCV
 import joblib
 
 # Load the training data
-X_train = pd.read_csv("data/processed_data/X_train_scaled.csv")
-y_train = pd.read_csv("data/processed_data/y_train.csv")
+X_train = pd.read_csv("data/processed/X_train_scaled.csv")
+y_train = pd.read_csv("data/processed/y_train.csv")
 
 # Define a parameter grid for GradientBoostingRegressor
 param_grid = {
