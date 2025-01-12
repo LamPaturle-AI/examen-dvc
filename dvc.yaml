@@ -1,8 +1,0 @@
-stages:
-  train_test_split:
-    cmd: python src/data/data_split.py
-    deps:
-    - data/raw
-    - src/data/data_split.py
-    outs:
-    - data/processed
