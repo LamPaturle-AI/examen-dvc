@@ -27,6 +27,15 @@ dvc remote modify origin --local secret_access_key 8a08ba4d3a9988a7f9c1664a9c97b
 # Setup default origin
 dvc remote default origin
 
+# Add data/raw_data to dvc
+dvc add data/raw
+
+# Track the changes with git
+git add data/raw.dvc data/.gitignore
+
+# Push to DVC
+dvc push
+
 # Add stage 1
 dvc stage add -n split \
               -d src/data/data_split.py -d data/raw_data \
