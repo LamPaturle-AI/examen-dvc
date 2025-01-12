@@ -52,7 +52,7 @@ stages:
       hash: md5
       md5: 5a53ba4e8232e6b1cd840e260550b65f
       size: 227423
-  grid_search:
+  gridsearch:
     cmd: python src/models/grid_search.py
     deps:
     - path: data/processed/X_train_scaled.csv
