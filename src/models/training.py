@@ -3,8 +3,8 @@ from sklearn.ensemble import GradientBoostingRegressor
 import joblib
 
 # Load the training data
-X_train = pd.read_csv("data/processed_data/X_train_scaled.csv")
-y_train = pd.read_csv("data/processed_data/y_train.csv")
+X_train = pd.read_csv("data/processed/X_train_scaled.csv")
+y_train = pd.read_csv("data/processed/y_train.csv")
 
 # Load best hyperparameters from best_params.pkl
 params_path = "models/best_params.pkl"
