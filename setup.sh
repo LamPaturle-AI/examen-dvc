@@ -11,7 +11,7 @@ mamba activate dsdvcexam
 pip install dvc
 
 # Initialize dvc
-dvc init
+dvc init -f
 
 # Install AWS s3
 pip install "dvc[s3]"
@@ -27,62 +27,69 @@ dvc remote modify origin --local secret_access_key 8a08ba4d3a9988a7f9c1664a9c97b
 # Setup default origin
 dvc remote default origin
 
-# Add data/raw/raw.csv to dvc
-dvc add data/raw/raw.csv
-
-# Track the changes with git
-git add data/raw/raw.csv.dvc data/raw/.gitignore
-
-# Push to DVC
-dvc push
-
 # Add stage 1
 dvc stage add -n split \
-              -d src/data/data_split.py -d data/raw \
-              -o data/processed \
+              -d src/data/data_split.py \
+              -d data/raw/raw.csv \
+              -o data/processed/X_train.csv \
+              -o data/processed/X_test.csv \
+              -o data/processed/y_train.csv \
+              -o data/processed/y_test.csv \
               python src/data/data_split.py
 dvc repro
 
 # Track new files on git
-git add dvc.yaml
+git add data/processed/.gitignore dvc.yaml
 git add dvc.lock
-
-# Add data/processed to dvc
-dvc add data/raw
-
-# Track the changes with git
-git add data/raw.dvc data/.gitignore
-
-# Push to DVC
-dvc push
 
 # Add stage 2
 dvc stage add -n normalize \
-              -d src/data/normalize.py -d data/processed \
-              -o data/processed \
+              -d src/data/normalize.py \
+              -d data/processed/X_train.csv \
+              -d data/processed/X_test.csv \
+              -o data/processed/X_train_scaled.csv \
+              -o data/processed/X_test_scaled.csv \
               python src/data/normalize.py
 dvc repro
 
+# Track new files on git
+git add models/.gitignore
+
 # Add stage 3
 dvc stage add -n grid_search \
-              -d src/models/grid_search.py -d data/processed \
-              -o models \
+              -d src/models/grid_search.py \
+              -d data/processed/X_train_scaled.csv \
+              -d data/processed/y_train.csv \
+              -o models/best_params.pkl \
               python src/models/grid_search.py
 dvc repro
 
 # Add stage 4
 dvc stage add -n train \
-              -d src/models/training.py -d data/processed \
-              -o models \
+              -d src/models/training.py \
+              -d data/processed/X_train_scaled.csv \
+              -d data/processed/y_train.csv \
+              -d models/best_params.pkl \
+              -o models/gbr_model.pkl \
               python src/models/training.py
 dvc repro
 
 # Add stage 5
 dvc stage add -n evaluate \
-              -d src/data/evaluate.py -d data/processed -d models \
-              -o processed -o metrics \
-              python src/data/evaluate.py
+    -d src/data/evaluate.py \
+    -d data/processed/X_test_scaled.csv \
+    -d data/processed/y_test.csv \
+    -d models/gbr_model.pkl \
+    -o data/processed/prediction.csv \
+    -m metrics/scores.json \
+    python src/data/evaluate.py
 dvc repro
+
+# Track new files on git
+git add metrics/.gitignore
+
+# Push to DVC
+dvc push
 
 # Install libraries
 pip install pandas
@@ -92,7 +99,7 @@ pip install sklearn
 pip install pipreqs 
 
 # Generate minimal requirements.txt
-pipreqs /examen-dvc --force
+pipreqs .
 
 # Remove virtual environment
 mamba remove -n dsdvcexam --all
