@@ -41,8 +41,8 @@ dvc stage add -n split \
               -p split.test_size \
               -p split.random_state \
               -d src/data/data_split.py \
-              -d params.yaml \
               -d data/raw/raw.csv \
+              -d params.yaml \
               -o data/processed/X_train.csv \
               -o data/processed/X_test.csv \
               -o data/processed/y_train.csv \
@@ -70,9 +70,9 @@ dvc stage add -n gridsearch \
               -p model.max_depth \
               -p model.learning_rate\
               -d src/models/grid_search.py \
-              -d params.yaml \
               -d data/processed/X_train_scaled.csv \
               -d data/processed/y_train.csv \
+              -d params.yaml \
               -o models/best_params.pkl \
               python src/models/grid_search.py
 dvc repro
